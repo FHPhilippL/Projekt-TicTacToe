@@ -10,7 +10,6 @@ public class Board {
         reset();
     }
 
-
     public String[][] getField() { //returns the current field
         return field;
     }
