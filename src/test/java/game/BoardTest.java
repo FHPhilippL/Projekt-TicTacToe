@@ -7,45 +7,27 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
 
     @Test
-    void when_passedVariable_3_or_higher_then_set_size_to_variable() {
-        // Arrange
-        int size = 4;
-        Board board = new Board();
-
-        // Act
-        board.setSize(size);
-
-        // Assert
-        assertEquals(size, board.getSize());
-    }
-
-    @Test
-    void when_passedVariable_lower_3_then_set_size_to_3(){
-        // Arrange
-        int size = 2;
-        Board board = new Board();
-
-        // Act
-        board.setSize(size);
-
-        // Assert
-        assertEquals(3, board.getSize());
-    }
-
-    @Test
-    void when_used_second_Constructor_create_new_Board(){
+    void assert_that_getField_returns_the_current_field(){
         //Arrange
-        int size = 4;
+        Board b = new Board();
+        String[][] s = {{" ", "X", "O"}, {"X", "O", "X"}, {"O", " ", " "}};
 
         //Act
-        Board board = new Board(4);
+        b.setFieldTest();
 
         //Assert
-        assertEquals(4, board.getSize());
-        assertEquals(4, board.getField().length);
-        assertEquals(4, board.getField()[0].length);
-        assertEquals(0, board.getMoveCounter());
+        assertArrayEquals(s, b.getField());
+    }
 
+    @Test
+    void assert_that_getMoveCounter_returns_the_current_moveCounter(){
+        //Arrange
+        Board b = new Board();
+
+        //Act
+
+        //Assert
+        assertEquals(0, b.getMoveCounter());
     }
 
     @Test
