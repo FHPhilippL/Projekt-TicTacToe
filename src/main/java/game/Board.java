@@ -24,7 +24,6 @@ public class Board {
         field[1][0] = "X";
         field[1][1] = "O";
         field[1][2] = "X";
-        field[2][0] = "O";
     }
 
     public int getMoveCounter() { //returns the current number of moves
@@ -55,6 +54,22 @@ public class Board {
             moveCounter++;
             return true;
         }
+        return false;
+    }
+
+    public boolean checkForWin(String symbol){
+        for(int i = 0; i < size; i++){
+            if(symbol.equals(field[i][0])&&symbol.equals(field[i][1])&&symbol.equals(field[i][2])) return true;
+        }
+
+        for(int i = 0; i < size; i++){
+            if(symbol.equals(field[0][i])&&symbol.equals(field[1][i])&&symbol.equals(field[2][i])) return true;
+        }
+
+        if(symbol.equals(field[0][0])&&symbol.equals(field[1][1])&&symbol.equals(field[2][2])) return true;
+
+        if(symbol.equals(field[0][2])&&symbol.equals(field[1][1])&&symbol.equals(field[2][0])) return true;
+
         return false;
     }
 
