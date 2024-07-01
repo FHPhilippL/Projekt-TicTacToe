@@ -1,8 +1,8 @@
 package game;
 
 public class Board {
-    private int size = 3; //Number of Rows and Columns; Default is 3
-    private String[][] field = new String[3][3]; // Playing-field
+    private int size = 3; //Number of Rows and Columns
+    private String[][] field; // Playing-field
     private int moveCounter = 0; // Counter for the Number of moves
 
     public Board() { // default constructor
@@ -27,6 +27,10 @@ public class Board {
         field[2][0] = "O";
     }
 
+    public int getMoveCounter() { //returns the current number of moves
+        return moveCounter;
+    }
+
     public void reset(){ // Resets the Game, to start a new one
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
@@ -34,19 +38,6 @@ public class Board {
             }
         }
         moveCounter = 0;
-    }
-
-    public int getMoveCounter() { //returns the current number of moves
-        return moveCounter;
-    }
-
-    public String printGameBoard(){ // returns a String of the current GameBoard
-        String s = "";
-        for(int row = 0; row < size; row++){
-            s += (field[row][0] + "|" + field[row][1] + "|" + field[row][2]+"");
-            if(row < 2) s+= "\n-----\n";
-        }
-        return s;
     }
 
     /**
@@ -65,5 +56,14 @@ public class Board {
             return true;
         }
         return false;
+    }
+
+    public String printGameBoard(){ // returns a String of the current GameBoard
+        String s = "";
+        for(int row = 0; row < size; row++){
+            s += (field[row][0] + "|" + field[row][1] + "|" + field[row][2]+"");
+            if(row < 2) s+= "\n-----\n";
+        }
+        return s;
     }
 }

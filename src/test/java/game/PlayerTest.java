@@ -52,5 +52,4 @@ class PlayerTest {
         //Assert
         assertEquals("P", p.getSymbol());
     }
-
 }
