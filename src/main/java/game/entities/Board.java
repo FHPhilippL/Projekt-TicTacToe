@@ -1,4 +1,4 @@
-package game;
+package game.entities;
 
 public class Board {
     private final int size = 3; //Number of Rows and Columns
