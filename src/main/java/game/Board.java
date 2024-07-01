@@ -48,4 +48,22 @@ public class Board {
         }
         return s;
     }
+
+    /**
+     * Adds the Symbol to the game if the position is still empty
+     * @param symbol the given Symbol to insert
+     * @param row the row in which the symbol should be added, must be positive and lower than 3
+     * @param col the column in which the symbol should be added, must be positive and lower than 3
+     * @return true if success, false otherwise
+     */
+    public boolean addSymbol(String symbol, int row, int col){
+        if(row >= size || row < 0) return false;
+        if(col >= size || col < 0) return false;
+        if(field[row][col].equals(" ")){
+            field[row][col]=symbol;
+            moveCounter++;
+            return true;
+        }
+        return false;
+    }
 }
