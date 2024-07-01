@@ -1,8 +1,8 @@
 package game;
 
 public class Board {
-    private int size = 3; //Number of Rows and Columns
-    private String[][] field; // Playing-field
+    private final int size = 3; //Number of Rows and Columns
+    private final String[][] field; // Playing-field
     private int moveCounter = 0; // Counter for the Number of moves
 
     public Board() { // default constructor
@@ -71,22 +71,28 @@ public class Board {
     /**
      * Checks if the current Player has 3 in a row
      * @param symbol the Symbol with that it checks
-     * @return true, when win, otherwise false;
+     * @return true, when won, otherwise false;
      */
     public boolean checkForWin(String symbol){
         for(int i = 0; i < size; i++){
-            if(symbol.equals(field[i][0])&&symbol.equals(field[i][1])&&symbol.equals(field[i][2])) return true;
+            if(symbol.equals(field[i][0]) && symbol.equals(field[i][1]) &&
+                    symbol.equals(field[i][2])){
+                return true;
+            }
         }
 
         for(int i = 0; i < size; i++){
-            if(symbol.equals(field[0][i])&&symbol.equals(field[1][i])&&symbol.equals(field[2][i])) return true;
+            if(symbol.equals(field[0][i]) && symbol.equals(field[1][i]) &&
+                    symbol.equals(field[2][i])){
+                return true;
+            }
         }
 
-        if(symbol.equals(field[0][0])&&symbol.equals(field[1][1])&&symbol.equals(field[2][2])) return true;
-
-        if(symbol.equals(field[0][2])&&symbol.equals(field[1][1])&&symbol.equals(field[2][0])) return true;
-
-        return false;
+        if(symbol.equals(field[0][0]) && symbol.equals(field[1][1]) &&
+                symbol.equals(field[2][2])){
+            return true;
+        } else return symbol.equals(field[0][2]) && symbol.equals(field[1][1]) &&
+                symbol.equals(field[2][0]);
     }
 
     /**
@@ -94,11 +100,12 @@ public class Board {
      * @return String of current Game
      */
     public String printGameBoard(){
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for(int row = 0; row < size; row++){
-            s += (field[row][0] + "|" + field[row][1] + "|" + field[row][2]+"");
-            if(row < 2) s+= "\n-----\n";
+            s.append(field[row][0]).append("|").append(field[row][1])
+                    .append("|").append(field[row][2]);
+            if(row < 2) s.append("\n-----\n");
         }
-        return s;
+        return s.toString();
     }
 }
