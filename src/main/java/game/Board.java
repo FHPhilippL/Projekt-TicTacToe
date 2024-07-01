@@ -10,7 +10,11 @@ public class Board {
         reset();
     }
 
-    public String[][] getField() { //returns the current field
+    /**
+     * Returns the Current field
+     * @return the field
+     */
+    public String[][] getField() {
         return field;
     }
 
@@ -26,11 +30,18 @@ public class Board {
         field[1][2] = "X";
     }
 
-    public int getMoveCounter() { //returns the current number of moves
+    /**
+     * returns the current moveCounter to either start to check for a win or to call a draw
+     * @return the current moveCounter
+     */
+    public int getMoveCounter() {
         return moveCounter;
     }
 
-    public void reset(){ // Resets the Game, to start a new one
+    /**
+     * Resets the field, so a new Game can be started
+     */
+    public void reset(){
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 field[row][col] = " ";
@@ -57,6 +68,11 @@ public class Board {
         return false;
     }
 
+    /**
+     * Checks if the current Player has 3 in a row
+     * @param symbol the Symbol with that it checks
+     * @return true, when win, otherwise false;
+     */
     public boolean checkForWin(String symbol){
         for(int i = 0; i < size; i++){
             if(symbol.equals(field[i][0])&&symbol.equals(field[i][1])&&symbol.equals(field[i][2])) return true;
@@ -73,7 +89,11 @@ public class Board {
         return false;
     }
 
-    public String printGameBoard(){ // returns a String of the current GameBoard
+    /**
+     * Returns a String of the current GameBoard in the TicTacToe Format
+     * @return String of current Game
+     */
+    public String printGameBoard(){
         String s = "";
         for(int row = 0; row < size; row++){
             s += (field[row][0] + "|" + field[row][1] + "|" + field[row][2]+"");
