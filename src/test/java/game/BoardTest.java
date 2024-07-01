@@ -45,4 +45,29 @@ class BoardTest {
         assertEquals(s1, b1.printGameBoard());
         assertEquals(s2, b2.printGameBoard());
     }
+
+    @Test
+    void assert_that_addSymbol_only_adds_when_Position_empty(){
+        //Arrange
+        Board b = new Board();
+        b.setFieldTest();
+
+        //Assert
+        assertTrue(b.addSymbol("X", 0, 0));
+        assertEquals(1, b.getMoveCounter());
+        assertFalse(b.addSymbol("O", 1, 1));
+    }
+
+    @Test
+    void assert_that_addSymbol_only_adds_between_0_and_1(){
+        //Arrange
+        Board b = new Board();
+        b.setFieldTest();
+
+        //Assert
+        assertFalse(b.addSymbol("X", 3, 2));
+        assertFalse(b.addSymbol("X", -1, 1));
+        assertFalse(b.addSymbol("O", 1, 3));
+        assertFalse(b.addSymbol("O", 2, -1));
+    }
 }
