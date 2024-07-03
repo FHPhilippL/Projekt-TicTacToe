@@ -6,12 +6,14 @@ import game.entities.Player;
 import java.util.Scanner;
 
 public class TicTacToe {
-    private static Player p1;
-    private static Player p2;
+    private static Player p1, p2; //The Players who will play against each other
     private static Scanner sc = new Scanner(System.in);
-    private static Board board;
-    private static int completed;
-    private static int starting = 1;
+    private static Board board; //The game Board
+
+    //completed: the nummer of completed matches; starting: the player who starts
+    private static int completed, starting = 1;
+
+    // true = if the game is over (a side won or there is a draw), false otherwise
     private static boolean isOver = false;
 
     public static void main(String[] args) {
@@ -78,46 +80,35 @@ public class TicTacToe {
      * Starts the Game and runs it
      */
     public static void runGame(){
-        int p1c, p1r, p2c, p2r;
         do{
-            if(starting == 1 || board.getMoveCounter() > 0){
-                do{
-                    System.out.println(board.printGameBoard());
-                    System.out.println("Player 1: "+ p1.getName() + "s turn: ");
-                    System.out.println("Which Row would you like?");
-                    p1r = sc.nextInt();
-                    System.out.println("Which Column would you like?");
-                    p1c = sc.nextInt();
-                } while (!board.addSymbol(p1.getSymbol(), p1r, p1c));
-
-                if(board.getMoveCounter()>=4){
-                    if(board.checkForWin(p1.getSymbol())){
-                        victory(p1);
-                    }else if(board.getMoveCounter() == 9) draw();
-                }
-            }
-
-            if(!isOver){
-                do{
-                    System.out.println(board.printGameBoard());
-                    System.out.println("Player 2: "+ p2.getName() + "s turn: ");
-                    System.out.println("Which Row would you like?");
-                    p2r = sc.nextInt();
-                    System.out.println("Which Column would you like?");
-                    p2c = sc.nextInt();
-                } while (!board.addSymbol(p2.getSymbol(), p2r, p2c));
-
-                if(board.getMoveCounter()>=4){
-                    if(board.checkForWin(p2.getSymbol())){
-                        victory(p2);
-                    }else if(board.getMoveCounter() == 9) draw();
-                }
-            }
+            if(starting == 1 || board.getMoveCounter() > 0) addSymbol(p1);
+            if(!isOver) addSymbol(p2);
         }while (!isOver);
         completed++;
         newGame();
     }
 
+    /**
+     * Adds a Symbol for the Player in the entered Row and Column
+     * @param p the Player who adds the Symbol
+     */
+    public static void addSymbol(Player p){
+        int row, col;
+        do{
+            System.out.println(board.printGameBoard());
+            System.out.println("Player "+ p.getName() + "s turn: ");
+            System.out.println("Which Row would you like? (1 - 3)");
+            row = sc.nextInt();
+            System.out.println("Which Column would you like? (1 - 3)");
+            col = sc.nextInt();
+        } while (!board.addSymbol(p.getSymbol(), row, col));
+
+        if(board.getMoveCounter()>=4){
+            if(board.checkForWin(p.getSymbol())){
+                victory(p);
+            }else if(board.getMoveCounter() == 9) draw();
+        }
+    }
 
     /**
      * In case of A Victory prints a Win Message

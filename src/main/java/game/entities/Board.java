@@ -19,18 +19,6 @@ public class Board {
     }
 
     /**
-     * For Test Purpose
-     * will be removed after another Methode has been implemented
-     */
-    public void setFieldTest(){
-        field[0][1] = "X";
-        field[0][2] = "O";
-        field[1][0] = "X";
-        field[1][1] = "O";
-        field[1][2] = "X";
-    }
-
-    /**
      * returns the current moveCounter to either start to check for a win or to call a draw
      * @return the current moveCounter
      */
@@ -58,16 +46,17 @@ public class Board {
      * @return true if success, false otherwise
      */
     public boolean addSymbol(String symbol, int row, int col){
-        if(row >= size || row < 0) return false;
-        if(col >= size || col < 0) return false;
-        if(field[row][col].equals(" ")){
-            field[row][col]=symbol;
+        if(row-1 >= size || row-1 < 0) return false;
+        if(col-1 >= size || col-1 < 0) return false;
+
+        if(field[row-1][col-1].equals(" ")){
+            field[row-1][col-1]=symbol;
             moveCounter++;
             return true;
-        }else{
-            System.err.println("This Position is already used!!");
-            return false;
         }
+
+        System.err.println("This Position is already used!!");
+        return false;
     }
 
     /**
