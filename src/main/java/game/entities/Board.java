@@ -14,7 +14,9 @@ public class Board {
      * Returns the Current field
      * @return the field
      */
-    public String[][] getField() { return field; }
+    public String[][] getField() {
+        return field;
+    }
 
     /**
      * returns the current moveCounter to either start to check for a win or to call a draw
@@ -44,11 +46,11 @@ public class Board {
      * @return true if success, false otherwise
      */
     public boolean addSymbol(String symbol, int row, int col){
-        if(row >= size || row < 0) return false;
-        if(col >= size || col < 0) return false;
+        if(row-1 >= size || row < 0) return false;
+        if(col-1 >= size || col < 0) return false;
 
-        if(field[row][col].equals(" ")){
-            field[row][col]=symbol;
+        if(field[row-1][col-1].equals(" ")){
+            field[row-1][col-1]=symbol;
             moveCounter++;
             return true;
         }

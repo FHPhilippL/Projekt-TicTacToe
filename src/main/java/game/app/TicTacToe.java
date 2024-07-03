@@ -6,12 +6,14 @@ import game.entities.Player;
 import java.util.Scanner;
 
 public class TicTacToe {
-    private static Player p1;
-    private static Player p2;
+    private static Player p1, p2; //The Players who will play against each other
     private static Scanner sc = new Scanner(System.in);
-    private static Board board;
-    private static int completed;
-    private static int starting = 1;
+    private static Board board; //The game Board
+
+    //completed: the nummer of completed matches; starting: the player who starts
+    private static int completed, starting = 1;
+
+    // true = if the game is over (a side won or there is a draw), false otherwise
     private static boolean isOver = false;
 
     public static void main(String[] args) {
@@ -78,28 +80,26 @@ public class TicTacToe {
      * Starts the Game and runs it
      */
     public static void runGame(){
-        int p1c, p1r, p2c, p2r;
         do{
-            if(starting == 1 || board.getMoveCounter() > 0){
-                addSymbol(p1);
-            }
-
-            if(!isOver){
-                addSymbol(p2);
-            }
+            if(starting == 1 || board.getMoveCounter() > 0) addSymbol(p1);
+            if(!isOver) addSymbol(p2);
         }while (!isOver);
         completed++;
         newGame();
     }
 
+    /**
+     * Adds a Symbol for the Player in the entered Row and Column
+     * @param p the Player who adds the Symbol
+     */
     public static void addSymbol(Player p){
         int row, col;
         do{
             System.out.println(board.printGameBoard());
             System.out.println("Player "+ p.getName() + "s turn: ");
-            System.out.println("Which Row would you like?");
+            System.out.println("Which Row would you like? (1 - 3)");
             row = sc.nextInt();
-            System.out.println("Which Column would you like?");
+            System.out.println("Which Column would you like? (1 - 3)");
             col = sc.nextInt();
         } while (!board.addSymbol(p.getSymbol(), row, col));
 
