@@ -46,8 +46,8 @@ public class Board {
      * @return true if success, false otherwise
      */
     public boolean addSymbol(String symbol, int row, int col){
-        if(row-1 >= size || row < 0) return false;
-        if(col-1 >= size || col < 0) return false;
+        if(row-1 >= size || row-1 < 0) return false;
+        if(col-1 >= size || col-1 < 0) return false;
 
         if(field[row-1][col-1].equals(" ")){
             field[row-1][col-1]=symbol;
