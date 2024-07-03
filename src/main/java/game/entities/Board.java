@@ -1,4 +1,4 @@
-package game;
+package game.entities;
 
 public class Board {
     private final int size = 3; //Number of Rows and Columns
@@ -64,8 +64,10 @@ public class Board {
             field[row][col]=symbol;
             moveCounter++;
             return true;
+        }else{
+            System.err.println("This Position is already used!!");
+            return false;
         }
-        return false;
     }
 
     /**

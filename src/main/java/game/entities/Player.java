@@ -1,8 +1,8 @@
-package game;
+package game.entities;
 
 public class Player {
     private String name;
-    private String symbol;
+    private String symbol = null;
 
     public Player(String name, String symbol) {
         this.name = name;
