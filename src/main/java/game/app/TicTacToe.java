@@ -19,6 +19,9 @@ public class TicTacToe {
         runGame();
     }
 
+    /**
+     * Initializes the Players as well as the Board
+     */
     public static void init(){
         System.out.print("Please enter the Name for Player 1: ");
         String name1 = sc.next();
@@ -35,6 +38,12 @@ public class TicTacToe {
         board = new Board();
     }
 
+    /**
+     * Creates a new Player with the given Variables
+     * @param name The name of the Player
+     * @param symbol The Symbol the player uses
+     * @return The created Player
+     */
     public static Player addPlayer(String name, String symbol){
         Player p = null;
         try{
@@ -65,6 +74,9 @@ public class TicTacToe {
         return p;
     }
 
+    /**
+     * Starts the Game and runs it
+     */
     public static void runGame(){
         int p1c, p1r, p2c, p2r;
         do{
@@ -106,18 +118,29 @@ public class TicTacToe {
         newGame();
     }
 
+
+    /**
+     * In case of A Victory prints a Win Message
+     * @param p the Player who won
+     */
     public static void victory(Player p){
         System.out.println("Congratulations: Player " + p.getName() + " won");
         System.out.println(board.printGameBoard());
         isOver = true;
     }
 
+    /**
+     * In case of a draw, prints a Draw Message
+     */
     public static void draw() {
         System.out.println("The Game Ended in a Draw");
         System.out.println(board.printGameBoard());
         isOver = true;
     }
 
+    /**
+     * Starts a new Game if the Players wish to
+     */
     public static void newGame(){
         System.out.print("\n\nDo you want to play a new Game? (y/n): ");
         String s = sc.next();
