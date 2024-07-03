@@ -19,18 +19,6 @@ public class Board {
     }
 
     /**
-     * For Test Purpose
-     * will be removed after another Methode has been implemented
-     */
-    public void setFieldTest(){
-        field[0][1] = "X";
-        field[0][2] = "O";
-        field[1][0] = "X";
-        field[1][1] = "O";
-        field[1][2] = "X";
-    }
-
-    /**
      * returns the current moveCounter to either start to check for a win or to call a draw
      * @return the current moveCounter
      */
@@ -64,10 +52,10 @@ public class Board {
             field[row][col]=symbol;
             moveCounter++;
             return true;
-        }else{
-            System.err.println("This Position is already used!!");
-            return false;
         }
+        System.err.println("This Position is already used!!");
+        return false;
+
     }
 
     /**

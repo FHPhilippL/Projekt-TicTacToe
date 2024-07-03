@@ -14,7 +14,11 @@ class BoardTest {
         String[][] s = {{" ", "X", "O"}, {"X", "O", "X"}, {" ", " ", " "}};
 
         //Act
-        b.setFieldTest();
+        b.addSymbol("X", 0, 1);
+        b.addSymbol("X", 1, 2);
+        b.addSymbol("X", 1, 0);
+        b.addSymbol("O", 0, 2);
+        b.addSymbol("O", 1, 1);
 
         //Assert
         assertArrayEquals(s, b.getField());
@@ -33,19 +37,31 @@ class BoardTest {
     void assert_that_addSymbol_only_adds_when_Position_empty(){
         //Arrange
         Board b = new Board();
-        b.setFieldTest();
+
+        //Act
+        b.addSymbol("X", 0, 1);
+        b.addSymbol("X", 1, 2);
+        b.addSymbol("X", 1, 0);
+        b.addSymbol("O", 0, 2);
+        b.addSymbol("O", 1, 1);
 
         //Assert
         assertTrue(b.addSymbol("X", 0, 0));
-        assertEquals(1, b.getMoveCounter());
+        assertEquals(6, b.getMoveCounter());
         assertFalse(b.addSymbol("O", 1, 1));
     }
 
     @Test
-    void assert_that_addSymbol_only_adds_between_0_and_1(){
+    void assert_that_addSymbol_only_adds_between_0_and_2(){
         //Arrange
         Board b = new Board();
-        b.setFieldTest();
+
+        //Act
+        b.addSymbol("X", 0, 1);
+        b.addSymbol("X", 1, 2);
+        b.addSymbol("X", 1, 0);
+        b.addSymbol("O", 0, 2);
+        b.addSymbol("O", 1, 1);
 
         //Assert
         assertFalse(b.addSymbol("X", 3, 2));
@@ -111,9 +127,14 @@ class BoardTest {
         //Arrange
         Board b = new Board();
         Board b2 = new Board();
-        b.setFieldTest();
+
 
         //Act
+        b.addSymbol("X", 0, 1);
+        b.addSymbol("X", 1, 2);
+        b.addSymbol("X", 1, 0);
+        b.addSymbol("O", 0, 2);
+        b.addSymbol("O", 1, 1);
         b.addSymbol("O", 2, 0);
         b2.addSymbol("X",0,0);
         b2.addSymbol("X", 1, 1);
@@ -149,7 +170,11 @@ class BoardTest {
         String s2 = " |X|O\n-----\nX|O|X\n-----\n | | ";
 
         //Act
-        b2.setFieldTest();
+        b2.addSymbol("X", 0, 1);
+        b2.addSymbol("X", 1, 2);
+        b2.addSymbol("X", 1, 0);
+        b2.addSymbol("O", 0, 2);
+        b2.addSymbol("O", 1, 1);
 
         //Assert
         assertEquals(s1, b1.printGameBoard());
