@@ -14,9 +14,7 @@ public class Board {
      * Returns the Current field
      * @return the field
      */
-    public String[][] getField() {
-        return field;
-    }
+    public String[][] getField() { return field; }
 
     /**
      * returns the current moveCounter to either start to check for a win or to call a draw
@@ -48,14 +46,15 @@ public class Board {
     public boolean addSymbol(String symbol, int row, int col){
         if(row >= size || row < 0) return false;
         if(col >= size || col < 0) return false;
+
         if(field[row][col].equals(" ")){
             field[row][col]=symbol;
             moveCounter++;
             return true;
         }
+
         System.err.println("This Position is already used!!");
         return false;
-
     }
 
     /**
