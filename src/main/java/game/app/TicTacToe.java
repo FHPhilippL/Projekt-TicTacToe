@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class TicTacToe {
     private static Player p1;
     private static Player p2;
-    private static final Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
     private static Board board;
     private static int completed;
-    private static int starting;
+    private static int starting = 1;
     private static boolean isOver = false;
 
     public static void main(String[] args) {
@@ -68,19 +68,21 @@ public class TicTacToe {
     public static void runGame(){
         int p1c, p1r, p2c, p2r;
         do{
-            do{
-                System.out.println(board.printGameBoard());
-                System.out.println("Player 1: "+ p1.getName() + "s turn: ");
-                System.out.println("Which Row would you like?");
-                p1r = sc.nextInt();
-                System.out.println("Which Column would you like?");
-                p1c = sc.nextInt();
-            } while (!board.addSymbol(p1.getSymbol(), p1r, p1c));
+            if(starting == 1 || board.getMoveCounter() > 0){
+                do{
+                    System.out.println(board.printGameBoard());
+                    System.out.println("Player 1: "+ p1.getName() + "s turn: ");
+                    System.out.println("Which Row would you like?");
+                    p1r = sc.nextInt();
+                    System.out.println("Which Column would you like?");
+                    p1c = sc.nextInt();
+                } while (!board.addSymbol(p1.getSymbol(), p1r, p1c));
 
-            if(board.getMoveCounter()>=4){
-                if(board.checkForWin(p1.getSymbol())){
-                    victory(p1);
-                }else if(board.getMoveCounter() == 9) draw();
+                if(board.getMoveCounter()>=4){
+                    if(board.checkForWin(p1.getSymbol())){
+                        victory(p1);
+                    }else if(board.getMoveCounter() == 9) draw();
+                }
             }
 
             if(!isOver){
@@ -100,6 +102,7 @@ public class TicTacToe {
                 }
             }
         }while (!isOver);
+        completed++;
         newGame();
     }
 
@@ -124,6 +127,9 @@ public class TicTacToe {
             case ("y"), ("yes") -> {
                 board.reset();
                 isOver = false;
+                if(completed%2 ==0){
+                    starting = 1;
+                }else starting = 2;
                 runGame();
                 return;
             }
