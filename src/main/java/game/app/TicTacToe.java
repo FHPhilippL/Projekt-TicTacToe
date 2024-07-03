@@ -81,43 +81,34 @@ public class TicTacToe {
         int p1c, p1r, p2c, p2r;
         do{
             if(starting == 1 || board.getMoveCounter() > 0){
-                do{
-                    System.out.println(board.printGameBoard());
-                    System.out.println("Player 1: "+ p1.getName() + "s turn: ");
-                    System.out.println("Which Row would you like?");
-                    p1r = sc.nextInt();
-                    System.out.println("Which Column would you like?");
-                    p1c = sc.nextInt();
-                } while (!board.addSymbol(p1.getSymbol(), p1r, p1c));
-
-                if(board.getMoveCounter()>=4){
-                    if(board.checkForWin(p1.getSymbol())){
-                        victory(p1);
-                    }else if(board.getMoveCounter() == 9) draw();
-                }
+                addSymbol(p1);
             }
 
             if(!isOver){
-                do{
-                    System.out.println(board.printGameBoard());
-                    System.out.println("Player 2: "+ p2.getName() + "s turn: ");
-                    System.out.println("Which Row would you like?");
-                    p2r = sc.nextInt();
-                    System.out.println("Which Column would you like?");
-                    p2c = sc.nextInt();
-                } while (!board.addSymbol(p2.getSymbol(), p2r, p2c));
-
-                if(board.getMoveCounter()>=4){
-                    if(board.checkForWin(p2.getSymbol())){
-                        victory(p2);
-                    }else if(board.getMoveCounter() == 9) draw();
-                }
+                addSymbol(p2);
             }
         }while (!isOver);
         completed++;
         newGame();
     }
 
+    public static void addSymbol(Player p){
+        int row, col;
+        do{
+            System.out.println(board.printGameBoard());
+            System.out.println("Player "+ p.getName() + "s turn: ");
+            System.out.println("Which Row would you like?");
+            row = sc.nextInt();
+            System.out.println("Which Column would you like?");
+            col = sc.nextInt();
+        } while (!board.addSymbol(p.getSymbol(), row, col));
+
+        if(board.getMoveCounter()>=4){
+            if(board.checkForWin(p.getSymbol())){
+                victory(p);
+            }else if(board.getMoveCounter() == 9) draw();
+        }
+    }
 
     /**
      * In case of A Victory prints a Win Message
