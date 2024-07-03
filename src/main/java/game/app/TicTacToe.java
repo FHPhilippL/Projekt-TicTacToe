@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class TicTacToe {
     private static Player p1;
     private static Player p2;
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
     private static Board board;
     private static int completed;
     private static int starting;
@@ -26,9 +26,7 @@ public class TicTacToe {
         String symbol1 = sc.next();
         p1 = addPlayer(name1, symbol1);
 
-        System.out.println("");
-
-        System.out.print("Please enter the Name for Player 2: ");
+        System.out.print("\nPlease enter the Name for Player 2: ");
         String name2 = sc.next();
         System.out.print("Please enter the Symbol you would like to chose: ");
         String symbol2 = sc.next();
@@ -102,6 +100,7 @@ public class TicTacToe {
                 }
             }
         }while (!isOver);
+        newGame();
     }
 
     public static void victory(Player p){
@@ -114,5 +113,25 @@ public class TicTacToe {
         System.out.println("The Game Ended in a Draw");
         System.out.println(board.printGameBoard());
         isOver = true;
+    }
+
+    public static void newGame(){
+        System.out.print("\n\nDo you want to play a new Game? (y/n): ");
+        String s = sc.next();
+        s = s.toLowerCase();
+
+        switch (s) {
+            case ("y"), ("yes") -> {
+                board.reset();
+                isOver = false;
+                runGame();
+                return;
+            }
+            default -> {
+            }
+        }
+
+        System.out.println("The Game has Ended");
+        System.out.println("Thank you for playing");
     }
 }
