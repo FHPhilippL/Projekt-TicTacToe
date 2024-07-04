@@ -7,6 +7,31 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
 
     @Test
+    void assert_that_the_Board_has_been_created_successfully(){
+        //Arrange
+        Board b = new Board();
+        Board empty = new Board();
+
+        //Act
+        empty.reset();
+
+        //Assert
+        assertEquals(0, b.getMoveCounter());
+        assertArrayEquals(empty.getField(), b.getField());
+    }
+
+    @Test
+    void assert_that_the_Board_has_not_been_created_unsuccessfully(){
+        //Arrange
+        Board b = new Board();
+        String[][] empty = new String[3][3];
+
+        //Assert
+        assertNotEquals(1, b.getMoveCounter());
+        assertNotEquals(empty, b.getField());
+    }
+
+    @Test
     void assert_that_getField_returns_the_current_field(){
         //Arrange
         Board b = new Board();
@@ -24,16 +49,76 @@ class BoardTest {
     }
 
     @Test
+    void assert_that_getField_only_returns_the_correct_field(){
+        //Arrange
+        Board b = new Board();
+        String[][] s = {{" ", "X", "O"}, {"X", "O", "X"}, {"X", " ", " "}};
+
+        //Act
+        b.addSymbol("X", 1, 2);
+        b.addSymbol("X", 2, 3);
+        b.addSymbol("X", 2, 1);
+        b.addSymbol("O", 1, 3);
+        b.addSymbol("O", 2, 2);
+
+        //Assert
+        assertNotEquals(s, b.getField());
+    }
+
+    @Test
     void assert_that_getMoveCounter_returns_the_current_moveCounter(){
         //Arrange
         Board b = new Board();
 
+        //Act
+        b.addSymbol("X", 1, 1);
+
         //Assert
-        assertEquals(0, b.getMoveCounter());
+        assertEquals(1, b.getMoveCounter());
     }
 
     @Test
-    void assert_that_addSymbol_only_adds_when_Position_empty(){
+    void assert_that_getMoveCounter_only_returns_the_correct_moveCounter(){
+        //Arrange
+        Board b = new Board();
+
+        //Act
+        b.addSymbol("X", 1, 1);
+
+        //Assert
+        assertNotEquals(0, b.getMoveCounter());
+    }
+
+    @Test
+    void assert_that_reset_returns_the_Board_to_the_beginning_Values(){
+        //Arrange
+        Board b = new Board();
+
+        //Act
+        b.addSymbol("X", 1, 1);
+        b.reset();
+
+        //Assert
+        assertArrayEquals(new Board().getField(), b.getField());
+    }
+
+    @Test
+    void assert_that_reset_does_not_leave_a_Position_filled(){
+        //Arrange
+        Board b1 = new Board();
+        Board b2 = new Board();
+
+        //Act
+        b1.addSymbol("X", 1, 1);
+        b2.addSymbol("X", 1, 1);
+        b1.reset();
+
+        //Assert
+        assertNotEquals(b2.getField(), b1.getField());
+    }
+
+    @Test
+    void assert_that_addSymbol_adds_when_Position_empty(){
         //Arrange
         Board b = new Board();
 
@@ -46,8 +131,22 @@ class BoardTest {
 
         //Assert
         assertTrue(b.addSymbol("X", 1, 1));
-        assertEquals(6, b.getMoveCounter());
-        assertFalse(b.addSymbol("O", 2, 2));
+    }
+
+    @Test
+    void assert_that_addSymbol_does_not_add_when_Position_not_empty(){
+        //Arrange
+        Board b = new Board();
+
+        //Act
+        b.addSymbol("X", 1, 2);
+        b.addSymbol("X", 2, 3);
+        b.addSymbol("X", 2, 1);
+        b.addSymbol("O", 1, 3);
+        b.addSymbol("O", 2, 2);
+
+        //Assert
+        assertFalse(b.addSymbol("X", 1,2));
     }
 
     @Test
@@ -60,7 +159,7 @@ class BoardTest {
         b.addSymbol("X", 2, 3);
         b.addSymbol("X", 2, 1);
         b.addSymbol("O", 1, 3);
-        b.addSymbol("O", 2, 1);
+        b.addSymbol("O", 2, 2);
 
         //Assert
         assertFalse(b.addSymbol("X", 4, 3));
@@ -175,5 +274,22 @@ class BoardTest {
         //Assert
         assertEquals(s1, b1.printGameBoard());
         assertEquals(s2, b2.printGameBoard());
+    }
+
+    @Test
+    void assert_that_printGameBoard_does_not_return_a_wrong_Board(){
+        //Arrange
+        Board b = new Board();
+        String s2 = " |X|O\n-----\nX|O|X\n-----\nX| | ";
+
+        //Act
+        b.addSymbol("X", 1, 2);
+        b.addSymbol("X", 2, 3);
+        b.addSymbol("X", 2, 1);
+        b.addSymbol("O", 1, 3);
+        b.addSymbol("O", 2, 2);
+
+        //Assert
+        assertNotEquals(s2, b.printGameBoard());
     }
 }

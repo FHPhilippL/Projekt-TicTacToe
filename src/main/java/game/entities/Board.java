@@ -53,10 +53,10 @@ public class Board {
             field[row-1][col-1]=symbol;
             moveCounter++;
             return true;
+        }else{
+            System.err.println("This Position is already used!!");
+            return false;
         }
-
-        System.err.println("This Position is already used!!");
-        return false;
     }
 
     /**
