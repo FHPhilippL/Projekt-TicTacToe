@@ -7,6 +7,31 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
 
     @Test
+    void assert_that_the_Board_has_been_created_successfully(){
+        //Arrange
+        Board b = new Board();
+        Board empty = new Board();
+
+        //Act
+        empty.reset();
+
+        //Assert
+        assertEquals(0, b.getMoveCounter());
+        assertArrayEquals(empty.getField(), b.getField());
+    }
+
+    @Test
+    void assert_that_the_Board_has_not_been_created_unsuccessfully(){
+        //Arrange
+        Board b = new Board();
+        String[][] empty = new String[3][3];
+
+        //Assert
+        assertNotEquals(1, b.getMoveCounter());
+        assertNotEquals(empty, b.getField());
+    }
+
+    @Test
     void assert_that_getField_returns_the_current_field(){
         //Arrange
         Board b = new Board();
