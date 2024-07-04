@@ -1,7 +1,7 @@
 package game.entities;
 
 public class Player {
-    private String name; //The name of the Player
+    private final String name; //The name of the Player
     private String symbol = null; // the Symbol the PLayer uses
 
     public Player(String name, String symbol) {
